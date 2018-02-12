@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    container_name: survival10
+    restart: unless-stopped
+    ports:
+      - "25571:25571"
+    volumes:
+      - /data/newminecraft/survival10/:/data
+    environment:
+      TYPE: SPIGOT
+      VERSION: 1.12.2
+      SERVERPORT: 25571
+      SEED: 1785852800490497919
+      EULA: "TRUE"
+      CONSOLE: "false"
+      ENABLE_RCON: "true"
+      RCON_PASSWORD: "testing"
+      RCON_PORT: 28016
+  rcon:
+    image: itzg/rcon
+    ports:
+      - "4326:4326"
+      - "4327:4327"
+    volumes:
+      - /data/newminecraft/survival10-rcon:/opt/rcon-web-admin/db
+
